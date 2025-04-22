@@ -7,6 +7,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -20,21 +24,13 @@ public class BookLoan {
     private LocalDate dueDate;
     private boolean returned;
 
-
+    @ManyToOne
+    @JoinColumn(name="app_user_id")
+    private AppUser appUser;
 
     @ManyToOne
-    @JoinColumn
-    private AppUser borrower;
-
-    @ManyToOne
-    @JoinColumn
+    @JoinColumn(name="book_id")
     private Book book;
-
-    public BookLoan(LocalDate loanDate, LocalDate dueDate, boolean returned) {
-        this.loanDate = loanDate;
-        this.dueDate = dueDate;
-        this.returned = returned;
-    }
 }
 
 

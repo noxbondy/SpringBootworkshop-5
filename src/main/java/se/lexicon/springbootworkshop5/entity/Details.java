@@ -7,6 +7,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -21,4 +24,8 @@ public class Details {
     @Column(nullable = false,length = 100,unique = true)
     private String email;
     private LocalDate birthday;
+
+    @OneToOne(mappedBy = "details")
+    private AppUser appUser;
+
 }

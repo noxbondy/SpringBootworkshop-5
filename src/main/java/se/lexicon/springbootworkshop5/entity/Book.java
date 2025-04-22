@@ -21,31 +21,34 @@ public class Book {
     private String title;
     private int maxLoanDays;
 
-
     private boolean available = true;
 
     @ManyToMany
     @JoinTable(name="book_author",
     joinColumns = @JoinColumn(name="book_id"),
-    inverseJoinColumns = @JoinColumn(name="author_id"))
-    private Set<Author>authors= new HashSet<>();
+    inverseJoinColumns = @JoinColumn(name="author"))
+    private Set<Author> authors = new HashSet<>();
+
+    @OneToMany(mappedBy = "book")
+    private Set<BookLoan> bookLoans = new HashSet<>();
 
 
-    public void addAuthor(Author author) {
-        authors.add(author);
-        author.getBooks().add(this);
 
-    }
 
-    public Book(String isbn, String title) {
-        this.isbn = isbn;
-        this.title = title;
-    }
 
-    public void removeAuthor(Author author) {
-        authors.remove(author);
-        author.getBooks().remove(this);
+public  void addBookLoan(BookLoan bookLoan){
+    bookLoans.add(bookLoan);
+    bookLoan.setBook(this);
+}
 
-    }
+public void removeBookLoan(BookLoan bookLoan){
+    bookLoans.remove(bookLoan);
+    bookLoan.setBook(null);
+}
+
+
+
+
+
 
 }

@@ -18,14 +18,13 @@ public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(nullable = false,length = 100)
     private String firstName;
+    @Column(nullable = false,length = 100)
     private String lastName;
+
 
     @ManyToMany(mappedBy = "author")
     private Set<Book> books = new HashSet<>();
 
-    public Author(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
 }
