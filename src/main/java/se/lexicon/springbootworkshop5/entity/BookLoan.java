@@ -24,13 +24,18 @@ public class BookLoan {
     private LocalDate dueDate;
     private boolean returned;
 
-    @ManyToOne
-    @JoinColumn(name="app_user_id")
+    @ManyToOne(fetch = FetchType.LAZY,optional = false)
+    @JoinColumn(name="app_user_id", nullable=false)
     private AppUser appUser;
 
-    @ManyToOne
-    @JoinColumn(name="book_id")
+    @ManyToOne(fetch = FetchType.LAZY,optional = false)
+    @JoinColumn(name="book_id",nullable = false)
     private Book book;
+
+    // business logic
+    public void returnBook() {
+        this.returned = true;
+    }
 }
 
 
