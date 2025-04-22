@@ -24,6 +24,9 @@ public interface Author extends CrudRepository<Author, Integer> {
                              @Param("firstName") String firstName,
                              @Param("lastName") String lastName);
 
+    // Delete by ID
+    void deleteById(Long id);
+
 
 
 
