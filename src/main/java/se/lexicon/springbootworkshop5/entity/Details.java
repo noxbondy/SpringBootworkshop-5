@@ -15,6 +15,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table(name="details")
 public class Details {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,4 +29,14 @@ public class Details {
     @OneToOne(mappedBy = "details")
     private AppUser appUser;
 
+    public Details(String name, String email) {
+        this.name = name;
+        this.email = email;
+    }
+
+    public Details(String name, String email, LocalDate birthday) {
+        this.name = name;
+        this.email = email;
+        this.birthday = birthday;
+    }
 }

@@ -26,20 +26,24 @@ public class AppUser {
     private LocalDate regDate;
 
 
-    @OneToOne
-    @JoinColumn(name="details_id")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="details_id",referencedColumnName = "id")
     private Details details;
 
-    @OneToMany
+    @OneToMany(mappedBy = "appUser", cascade = CascadeType.ALL,orphanRemoval = true)
     private Set<BookLoan> bookLoans = new HashSet<>();
 
+    public AppUser(String username, String password, LocalDate regDate, Details details) {
+        this.username = username;
+        this.password = password;
+        this.regDate = regDate;
+        this.details = details;
+    }
 
-
-
-
-
-
-
-
-
+    public void addBookLoan(BookLoan bookLoan) {
+        bookLoans.add(bookLoan);
+    }
+    public void removeBookLoan(BookLoan bookLoan) {
+        bookLoans.remove(bookLoan);
+    }
 }
